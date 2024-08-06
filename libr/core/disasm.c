@@ -1357,6 +1357,7 @@ static void ds_begin_line(RDisasmState *ds) {
 
 static void ds_newline(RDisasmState *ds) {
 	if (ds->pj) {
+		/*
 		const bool is_html = r_config_get_b (ds->core->config, "scr.html");
 		if (is_html) {
 			char *s = r_cons_html_filter (r_cons_get_buffer (), NULL);
@@ -1365,6 +1366,17 @@ static void ds_newline(RDisasmState *ds) {
 		} else {
 			pj_ks (ds->pj, "text", r_cons_get_buffer ());
 		}
+		*/
+		// TODO: - Make a function for pj that gets (RCore *core, RDisasmState *ds, RAnalOp *asmop)
+		//		 as args and then make a json format
+		//		 - take offset and arrow here
+
+		pj_k (ds->pj, "esil"); // split key and value to allow empty strings
+		pj_s (ds->pj, R_STRBUF_SAFEGET (&ds->analop.esil));
+		pj_ki (ds->pj, "refptr", ds->analop.refptr);
+		pj_kn (ds->pj, "fcn_addr", ds->fcn ? ds->fcn->addr : 0);
+		pj_kn (ds->pj, "fcn_last", ds->fcn ? r_anal_function_max_addr (ds->fcn) - ds->oplen : 0);
+		pj_ki (ds->pj, "size", ds->analop.size);
 		r_cons_reset ();
 		pj_end (ds->pj);
 	} else {
