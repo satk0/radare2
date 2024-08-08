@@ -1332,6 +1332,7 @@ static void ds_pre_line(RDisasmState *ds) {
 }
 
 static void ds_begin_line(RDisasmState *ds) {
+	/* TODO DELETE:
 	if (ds->pj) {
 		pj_o (ds->pj);
 		pj_kn (ds->pj, "offset", ds->vat);
@@ -1347,12 +1348,58 @@ static void ds_begin_line(RDisasmState *ds) {
 			}
 		}
 	}
+	*/
 	ds->buf_line_begin = r_cons_get_buffer_len ();
 	if (!ds->pj && ds->asm_hint_pos == -1) {
 		if (!ds_print_core_vmode (ds, ds->asm_hint_pos)) {
 			r_cons_printf ("    ");
 		}
 	}
+}
+static void pj_newline(RDisasmState *ds) {
+	RCore *core = ds->core;
+	RAnalOp asmop = ds->asmop;
+	PJ *pj = ds->pj;
+	RAnalFunction *f = ds->fcn;
+	char *opstr = ds->opstr;
+	char *str = ds->str;
+
+	if (R_STR_ISEMPTY (str)) {
+		return;
+	}
+
+	pj_o (pj);
+	pj_kn (pj, "offset", ds->at);
+	if (ds->analop.ptr != UT64_MAX) {
+		pj_kn (pj, "ptr", ds->analop.ptr);
+	}
+	if (ds->analop.val != UT64_MAX) {
+		pj_kn (pj, "val", ds->analop.val);
+	}
+	pj_k (pj, "esil"); // split key and value to allow empty strings
+	pj_s (pj, R_STRBUF_SAFEGET (&ds->analop.esil));
+	pj_ki (pj, "refptr", ds->analop.refptr);
+	pj_kn (pj, "fcn_addr", f ? f->addr : 0);
+	pj_kn (pj, "fcn_last", f ? r_anal_function_max_addr (f) - ds->oplen : 0);
+	pj_ki (pj, "size", ds->analop.size);
+	pj_ks (pj, "opcode", opstr);
+	pj_ks (pj, "disasm", str);
+	{
+		char *hex = r_asm_op_get_hex (&asmop);
+		pj_ks (pj, "bytes", hex);
+		free (hex);
+	}
+	pj_ks (pj, "family", r_anal_op_family_tostring (ds->analop.family));
+	pj_ks (pj, "type", r_anal_optype_tostring (ds->analop.type));
+	// indicate a relocated address
+	RBinReloc *rel = r_core_getreloc (core, ds->at, ds->analop.size);
+	// reloc is true if address in reloc table
+	pj_kb (pj, "reloc", rel);
+	// wanted the numerical values of the type information
+	pj_kn (pj, "type_num", (ut64)(ds->analop.type & UT64_MAX));
+	pj_kn (pj, "type2_num", (ut64)(ds->analop.type2 & UT64_MAX));
+
+	pj_end (ds->pj);
 }
 
 static void ds_newline(RDisasmState *ds) {
@@ -1371,14 +1418,15 @@ static void ds_newline(RDisasmState *ds) {
 		//		 as args and then make a json format
 		//		 - take offset and arrow here
 
-		pj_k (ds->pj, "esil"); // split key and value to allow empty strings
-		pj_s (ds->pj, R_STRBUF_SAFEGET (&ds->analop.esil));
-		pj_ki (ds->pj, "refptr", ds->analop.refptr);
-		pj_kn (ds->pj, "fcn_addr", ds->fcn ? ds->fcn->addr : 0);
-		pj_kn (ds->pj, "fcn_last", ds->fcn ? r_anal_function_max_addr (ds->fcn) - ds->oplen : 0);
-		pj_ki (ds->pj, "size", ds->analop.size);
-		r_cons_reset ();
-		pj_end (ds->pj);
+		//pj_k (ds->pj, "esil"); // split key and value to allow empty strings
+		//pj_s (ds->pj, R_STRBUF_SAFEGET (&ds->analop.esil));
+		//pj_ki (ds->pj, "refptr", ds->analop.refptr);
+		//pj_kn (ds->pj, "fcn_addr", ds->fcn ? ds->fcn->addr : 0);
+		//pj_kn (ds->pj, "fcn_last", ds->fcn ? r_anal_function_max_addr (ds->fcn) - ds->oplen : 0);
+		//pj_ki (ds->pj, "size", ds->analop.size);
+		//r_cons_reset ();
+		//pj_end (ds->pj);
+		pj_newline (ds);
 	} else {
 		r_cons_newline ();
 	}
