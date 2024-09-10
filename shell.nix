@@ -12,6 +12,7 @@ pkgs.mkShell {
       gnumake
       gcc
       ccls
+	  bear
     ];
 
     shellHook = ''
