@@ -1,18 +1,18 @@
-{ 
+{
     pkgs,
     ...
 }:
 pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
-        makeWrapper
-        bashInteractive
+      makeWrapper
+      bashInteractive
     ];
-    
+
     buildInputs = with pkgs; [
       gnumake
       gcc
       ccls
-	  bear
+      bear
     ];
 
     shellHook = ''
