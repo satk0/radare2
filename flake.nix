@@ -1,5 +1,4 @@
 {
-# At the beginning it was generated with "C++ example flake for Zero to Nix" template
   description = "Radare2 devshell";
 
   inputs = {
@@ -12,9 +11,13 @@
     let
       # Helper to provide system-specific attributes
       pkgs = import nixpkgs { inherit system; };
+      #fhs = pkgs.callPackage ./shell.nix {inherit pkgs; };
 
     in {
-        devShells.default = pkgs.callPackage ./shell.nix {inherit pkgs; };
+        #devShells.default = fhs.env;
+        # TODO: Make it use FHSEnv as a sudo wrapper as polkit or run0 instead of docker
+        #devShells.default = pkgs.callPackage ./shell.nix {inherit pkgs; };
+        devShells.default = pkgs.callPackage ./dev.nix {inherit pkgs; };
     }
   );
 }

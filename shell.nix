@@ -2,21 +2,30 @@
     pkgs,
     ...
 }:
-pkgs.mkShell {
-    nativeBuildInputs = with pkgs; [
-      makeWrapper
-      bashInteractive
-    ];
+(pkgs.buildFHSEnv {
+	name = "r2-FHSEnv";
+    #nativeBuildInputs = with pkgs; [
+    #  makeWrapper
+    #  bashInteractive
+    #];
 
-    buildInputs = with pkgs; [
+    #buildInputs = with pkgs; [
+    #  gnumake
+    #  gcc
+    #  ccls
+    #  bear
+    #];
+
+    targetPkgs = pkgs: (with pkgs; [
       gnumake
       gcc
       ccls
       bear
-    ];
+    ]);
 
-    shellHook = ''
-      echo "Hello from shell!"
-    '';
-}
+    runScript = "bash";
 
+    #shellHook = ''
+    #  echo "Hello from shell!"
+    #'';
+}).env
