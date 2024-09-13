@@ -17,7 +17,7 @@ pkgs.mkShell {
 
     buildInputs = with pkgs; [
       gnumake
-      gcc
+      #gcc
       ccls
       bear
       jq
