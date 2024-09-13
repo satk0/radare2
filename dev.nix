@@ -11,6 +11,7 @@ pkgs.mkShell {
 
     NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
       pkgs.stdenv.cc.cc
+      pkgs.glibc
     ];
     NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
 
@@ -19,9 +20,9 @@ pkgs.mkShell {
       gcc
       ccls
       bear
-      glibc
       jq
-      patchelf
+      #glibc
+      #patchelf
     ];
 
     sourceRoot = ".";
@@ -35,3 +36,4 @@ pkgs.mkShell {
     #  patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" ./test/bins/elf/analysis/x86-helloworld-gcc
     #'';
 }
+
