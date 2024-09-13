@@ -9,6 +9,11 @@ pkgs.mkShell {
         #autoPatchelfHook
     ];
 
+    NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+      pkgs.stdenv.cc.cc
+    ];
+    NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+
     buildInputs = with pkgs; [
       gnumake
       gcc
