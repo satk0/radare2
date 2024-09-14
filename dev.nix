@@ -26,6 +26,10 @@ pkgs.mkShell {
 
     sourceRoot = ".";
 
+    # https://github.com/NixOS/nixpkgs/issues/18995
+    hardeningDisable = [ "all" ];
+
+
     shellHook = ''
       export R2R_SKIP_ASM=1
       export R2R_SKIP_ARCHOS=1
