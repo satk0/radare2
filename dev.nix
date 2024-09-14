@@ -21,6 +21,7 @@ pkgs.mkShell {
       ccls
       bear
       jq
+      nodejs_22
     ];
 
     sourceRoot = ".";
