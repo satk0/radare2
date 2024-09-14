@@ -6,34 +6,34 @@ pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
         makeWrapper
         bashInteractive
-        #autoPatchelfHook
     ];
 
-    NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-      pkgs.stdenv.cc.cc
-      pkgs.glibc
-    ];
+    NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+      stdenv.cc.cc
+      glibc
+      libselinux
+    ]);
+
     NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
 
     buildInputs = with pkgs; [
       gnumake
-      #gcc
       ccls
       bear
       jq
-      #glibc
-      #patchelf
     ];
 
     sourceRoot = ".";
 
     shellHook = ''
+      export R2R_SKIP_ASM=1
+      export R2R_SKIP_ARCHOS=1
+
+      if test -f /etc/NIXOS && test ! -f /bin/ls; then
+        sudo ln -s /run/current-system/sw/bin/ls /bin/ls
+      fi
+
       echo "Hello from shell!"
     '';
-    #postShellHook = ''
-    #  patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)"  ./test/bins/elf/analysis/calls_x64
-    #  patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" ./test/bins/elf/analysis/x64-loop
-    #  patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" ./test/bins/elf/analysis/x86-helloworld-gcc
-    #'';
 }
 
