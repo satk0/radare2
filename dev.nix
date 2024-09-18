@@ -21,7 +21,6 @@ pkgs.mkShell {
       ccls
       bear
       jq
-      capstone
     ];
 
     sourceRoot = ".";
