@@ -18,7 +18,6 @@ endif
 .PHONY: $(QJS_NAME)
 
 QJS_CFLAGS+=-D QJS_LIBC=$(QJS_LIBC)
-QJS_CFLAGS+=-D CONFIG_STACK_CHECK=y
 QJS_CFLAGS+=-D QJS_NOABORT=1
 QJS_CFLAGS+=-U CONFIG_BIGNUM
 QJS_CFLAGS+=-U DUMP_LEAKS
@@ -26,7 +25,7 @@ QJS_CFLAGS+=-U NDEBUG
 
 QJS_LIBS+=-lr_core -lr_config -lr_cons
 
-QJS_VERSION=$(shell cat src/VERSION.txt)
+QJS_VERSION=$(shell cat src/VERSION)
 
 JS_CFILES:=js_repl.c js_r2papi.c js_require.c
 
@@ -45,7 +44,7 @@ sync-qjs qjs-sync sync:
 	rm -rf src/.git
 	mkdir -p src2
 	ls src
-	cp $(QJS_FILES) src/*.h src/Makefile src/VERSION.txt src2/
+	cp $(QJS_FILES) src/*.h src/Makefile src/VERSION src2/
 	rm -rf src
 	mv src2 src
 	sed -i -e 's/CONFIG_VERSION/"$(QJS_VERSION)"/' src/quickjs.c
