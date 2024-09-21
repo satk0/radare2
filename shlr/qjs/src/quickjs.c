@@ -50209,7 +50209,8 @@ static struct {
 };
 
 static BOOL string_get_tzabbr(const uint8_t *sp, int *pp, int *offset) {
-    for (size_t i = 0; i < countof(js_tzabbr); i++) {
+    size_t i;
+    for (i = 0; i < countof(js_tzabbr); i++) {
         if (string_match(sp, pp, js_tzabbr[i].name)) {
             *offset = js_tzabbr[i].offset;
             return TRUE;
