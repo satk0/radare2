@@ -13,7 +13,7 @@ EXPECT_ERR=<<EOF
 ERROR: ReferenceError: 'a' is not defined
 ERROR:     at <eval> (-)
 
-ERROR: null
+ERROR: [unsupported type]
 EOF
 RUN
 
