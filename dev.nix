@@ -30,7 +30,7 @@ pkgs.mkShell {
 
 
     shellHook = ''
-      export R2R_SKIP_ASM=1
+      #export R2R_SKIP_ASM=1
       export R2R_SKIP_ARCHOS=1
 
       if test -f /etc/NIXOS && test ! -f /bin/ls; then
