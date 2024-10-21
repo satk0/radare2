@@ -1091,7 +1091,7 @@ static void cmd_ic(RCore *core, const char *input, PJ *pj, bool is_array, bool v
 #if R2_USE_NEW_ABI
 				if (!obj || !obj->classes || r_list_empty (obj->classes))
 #else
-				if (!obj || !obj->classes || RVecRBinClass_empty (&obj->classes))
+				if (!obj || !obj->classes || RVecRBinClass_length (&obj->classes) == 0)
 #endif
 				{
 					if (r_str_startswith (input, "lc")) { // "iclc"
