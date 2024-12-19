@@ -21,6 +21,7 @@ pkgs.mkShell {
       ccls
       bear
       jq
+      python3 # for meson
     ];
 
     sourceRoot = ".";
