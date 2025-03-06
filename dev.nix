@@ -22,6 +22,7 @@ pkgs.mkShell {
       bear
       jq
       python3 # for meson
+      gdb
     ];
 
     sourceRoot = ".";
