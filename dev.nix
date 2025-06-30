@@ -23,6 +23,8 @@ pkgs.mkShell {
       jq
       python3 # for meson
       gdb
+
+      valgrind
     ];
 
     sourceRoot = ".";
