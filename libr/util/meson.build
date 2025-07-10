@@ -135,6 +135,7 @@ else
 endif
 
 
+message('--- Building r_util ---')
 r_util = library('r_util', r_util_sources,
   include_directories: platform_inc,
   c_args: library_cflags,
@@ -144,6 +145,7 @@ r_util = library('r_util', r_util_sources,
   install_rpath: rpath_lib,
   soversion: r2_libversion
 )
+message('--- LOL ---')
 
 r_util_dep = declare_dependency(link_with: r_util,
   include_directories: platform_inc,
