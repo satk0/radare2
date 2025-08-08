@@ -22,11 +22,13 @@
 
 
 #include "../../../include/disas-asm.h"
+#include "../../../include/elf-bfd.h"
+
 #include "arc.h"
+#include "arcompact-dis.h"
 #include "arc-ext.h"
 #include "arc-dis.h"
-#include "arcompact-dis.h"
-#include "../../../include/elf-bfd.h"
+
 #include "r_types.h"
 #include "r_util.h"
 
