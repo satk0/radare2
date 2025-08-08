@@ -1,5 +1,5 @@
 # handle zlib dependency
-zlib_dep = dependency('zlib', version : '>=1.2.8', required: false)
+zlib_dep = dependency('zlib', version : '>=1.2.8', required: false, static: get_option('static_runtime'))
 if not zlib_dep.found() or not get_option('use_sys_zlib')
   message('Use subprojected zlib')
 
