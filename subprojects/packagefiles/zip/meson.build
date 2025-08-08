@@ -19,6 +19,7 @@ endif
 libzip_deps = [zlib_dep]
 
 zip_files = [
+  'lib/zip_add.c',
   'lib/zip_add_dir.c',
   'lib/zip_add_entry.c',
   'lib/zip_algorithm_deflate.c',
@@ -29,7 +30,7 @@ zip_files = [
   'lib/zip_dirent.c',
   'lib/zip_discard.c',
   'lib/zip_entry.c',
-  'lib/zip_realloc.c',
+  # 'lib/zip_realloc.c',
   'lib/zip_error.c',
   'lib/zip_error_clear.c',
   'lib/zip_error_get.c',
