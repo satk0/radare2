@@ -131,6 +131,7 @@ zip_files = [
   'lib/zip_utf-8.c',
 ]
 
+zip_c_args = ['-DWIN32_LEAN_AND_MEAN']
 if host_machine.system() == 'windows'
   cc = meson.get_compiler('c')
   zip_files += [
@@ -155,6 +156,7 @@ zip_inc = [include_directories('lib', '.')]
 
 libzip = library('libzip', zip_files,
   dependencies: libzip_deps,
+  c_args: zip_c_args,
   include_directories: zip_inc
 )
 
