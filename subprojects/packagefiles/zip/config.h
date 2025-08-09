@@ -122,6 +122,13 @@
 #define HAVE_UNISTD_H 1
 #endif
 
+#ifdef _MSC_VER
+#define HAVE__SNPRINTF_S
+#define HAVE_MEMCPY_S
+#define HAVE_STRERROR_S
+#define HAVE_STRNCPY_S
+#endif
+
 /* Define to 1 if you have the `_close' function. */
 /* #undef HAVE__CLOSE */
 
