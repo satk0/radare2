@@ -1,8 +1,9 @@
 /* radare - LGPL - Copyright 2022-2025 - pancake */
 
+#include "zip.h"
+
 #include <r_fs.h>
 #include <r_lib.h>
-#include <zip.h>
 #include <sys/stat.h>
 
 static RFSFile *fs_zip_open(RFSRoot *root, const char *path, bool create) {
