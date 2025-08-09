@@ -123,7 +123,7 @@
 #endif
 
 #ifdef _MSC_VER
-#define HAVE__SNPRINTF_S
+#define HAVE__SNWPRINTF_S
 #define HAVE_MEMCPY_S
 #define HAVE_STRERROR_S
 #define HAVE_STRNCPY_S
