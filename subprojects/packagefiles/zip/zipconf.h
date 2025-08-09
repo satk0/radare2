@@ -13,6 +13,8 @@
 #define LIBZIP_VERSION_MINOR 11
 #define LIBZIP_VERSION_MICRO 4
 
+#define ZIP_STATIC 1
+
 #include <stdint.h>
 
 typedef int8_t zip_int8_t;
