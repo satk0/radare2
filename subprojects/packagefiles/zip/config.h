@@ -71,7 +71,9 @@
 #define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the `strcasecmp' function. */
+#ifndef _MSC_VER
 #define HAVE_STRCASECMP 1
+#endif
 
 /* Define to 1 if you have the `strdup' function. */
 #define HAVE_STRDUP 1
