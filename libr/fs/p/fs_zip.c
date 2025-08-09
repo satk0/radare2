@@ -1,10 +1,10 @@
 /* radare - LGPL - Copyright 2022-2025 - pancake */
 
-#include "zip.h"
-
-#include <r_fs.h>
 #include <r_lib.h>
+#include <r_fs.h>
 #include <sys/stat.h>
+
+#include <zip.h>
 
 static RFSFile *fs_zip_open(RFSRoot *root, const char *path, bool create) {
 	R_LOG_INFO ("zip.open (%s)", path);
