@@ -127,6 +127,7 @@
 #define HAVE_MEMCPY_S
 #define HAVE_STRERROR_S
 #define HAVE_STRNCPY_S
+#define HAVE__STRICMP
 #endif
 
 /* Define to 1 if you have the `_close' function. */
@@ -150,8 +151,6 @@
 /* Define to 1 if you have the `_strdup' function. */
 /* #undef HAVE__STRDUP */
 
-/* Define to 1 if you have the `_stricmp' function. */
-/* #undef HAVE__STRICMP */
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
